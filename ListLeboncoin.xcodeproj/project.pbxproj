@@ -9,23 +9,23 @@
 /* Begin PBXBuildFile section */
 		50AAF3F0281D64F600E3F75B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAF3EF281D64F600E3F75B /* AppDelegate.swift */; };
 		50AAF3F2281D64F600E3F75B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAF3F1281D64F600E3F75B /* SceneDelegate.swift */; };
-		50AAF3F4281D64F600E3F75B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAF3F3281D64F600E3F75B /* ViewController.swift */; };
 		50AAF3F7281D64F600E3F75B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50AAF3F5281D64F600E3F75B /* Main.storyboard */; };
 		50AAF3FA281D64F600E3F75B /* ListLeboncoin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 50AAF3F8281D64F600E3F75B /* ListLeboncoin.xcdatamodeld */; };
 		50AAF3FC281D64F900E3F75B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50AAF3FB281D64F900E3F75B /* Assets.xcassets */; };
 		50AAF3FF281D64F900E3F75B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50AAF3FD281D64F900E3F75B /* LaunchScreen.storyboard */; };
+		50AAF40A281D67D000E3F75B /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAF409281D67D000E3F75B /* ListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		50AAF3EC281D64F600E3F75B /* ListLeboncoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListLeboncoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50AAF3EF281D64F600E3F75B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50AAF3F1281D64F600E3F75B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		50AAF3F3281D64F600E3F75B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		50AAF3F6281D64F600E3F75B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		50AAF3F9281D64F600E3F75B /* ListLeboncoin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ListLeboncoin.xcdatamodel; sourceTree = "<group>"; };
 		50AAF3FB281D64F900E3F75B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50AAF3FE281D64F900E3F75B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		50AAF400281D64F900E3F75B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50AAF409281D67D000E3F75B /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +58,40 @@
 		50AAF3EE281D64F600E3F75B /* ListLeboncoin */ = {
 			isa = PBXGroup;
 			children = (
-				50AAF3EF281D64F600E3F75B /* AppDelegate.swift */,
-				50AAF3F1281D64F600E3F75B /* SceneDelegate.swift */,
-				50AAF3F3281D64F600E3F75B /* ViewController.swift */,
-				50AAF3F5281D64F600E3F75B /* Main.storyboard */,
+				50AAF408281D67A800E3F75B /* Controller */,
+				50AAF407281D679B00E3F75B /* View */,
+				50AAF406281D679300E3F75B /* Model */,
 				50AAF3FB281D64F900E3F75B /* Assets.xcassets */,
-				50AAF3FD281D64F900E3F75B /* LaunchScreen.storyboard */,
 				50AAF400281D64F900E3F75B /* Info.plist */,
 				50AAF3F8281D64F600E3F75B /* ListLeboncoin.xcdatamodeld */,
 			);
 			path = ListLeboncoin;
+			sourceTree = "<group>";
+		};
+		50AAF406281D679300E3F75B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				50AAF3F1281D64F600E3F75B /* SceneDelegate.swift */,
+				50AAF3EF281D64F600E3F75B /* AppDelegate.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		50AAF407281D679B00E3F75B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				50AAF3F5281D64F600E3F75B /* Main.storyboard */,
+				50AAF3FD281D64F900E3F75B /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50AAF408281D67A800E3F75B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				50AAF409281D67D000E3F75B /* ListViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,9 +165,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50AAF3F4281D64F600E3F75B /* ViewController.swift in Sources */,
 				50AAF3F0281D64F600E3F75B /* AppDelegate.swift in Sources */,
 				50AAF3F2281D64F600E3F75B /* SceneDelegate.swift in Sources */,
+				50AAF40A281D67D000E3F75B /* ListViewController.swift in Sources */,
 				50AAF3FA281D64F600E3F75B /* ListLeboncoin.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
