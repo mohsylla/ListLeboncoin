@@ -17,6 +17,7 @@
 		50AAF40C281D6B1900E3F75B /* CallApiDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAF40B281D6B1900E3F75B /* CallApiDataService.swift */; };
 		50AAF40E281D6B5000E3F75B /* ErrorCasesCallAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAF40D281D6B5000E3F75B /* ErrorCasesCallAPI.swift */; };
 		50AAF412281D6C4400E3F75B /* Ads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAF411281D6C4400E3F75B /* Ads.swift */; };
+		50AAF416281D73A800E3F75B /* AdsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAF415281D73A800E3F75B /* AdsCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		50AAF40B281D6B1900E3F75B /* CallApiDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallApiDataService.swift; sourceTree = "<group>"; };
 		50AAF40D281D6B5000E3F75B /* ErrorCasesCallAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCasesCallAPI.swift; sourceTree = "<group>"; };
 		50AAF411281D6C4400E3F75B /* Ads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ads.swift; sourceTree = "<group>"; };
+		50AAF415281D73A800E3F75B /* AdsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			children = (
 				50AAF3F5281D64F600E3F75B /* Main.storyboard */,
 				50AAF3FD281D64F900E3F75B /* LaunchScreen.storyboard */,
+				50AAF415281D73A800E3F75B /* AdsCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				50AAF40C281D6B1900E3F75B /* CallApiDataService.swift in Sources */,
 				50AAF3F2281D64F600E3F75B /* SceneDelegate.swift in Sources */,
 				50AAF40E281D6B5000E3F75B /* ErrorCasesCallAPI.swift in Sources */,
+				50AAF416281D73A800E3F75B /* AdsCollectionViewCell.swift in Sources */,
 				50AAF40A281D67D000E3F75B /* ListViewController.swift in Sources */,
 				50AAF3FA281D64F600E3F75B /* ListLeboncoin.xcdatamodeld in Sources */,
 			);
