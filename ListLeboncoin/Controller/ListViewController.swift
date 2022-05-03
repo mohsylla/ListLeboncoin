@@ -9,7 +9,7 @@ import UIKit
 
 class ListViewController: UIViewController {
 
-    var ads: [Ads]?
+    private var ads: [Ads]?
     private var collectionView: UICollectionView?
     
     override func viewDidLoad() {
@@ -55,6 +55,16 @@ class ListViewController: UIViewController {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "segueToDescription" else{
+            return
+        }
+        guard let segue = segue.destination as? DescriptionViewController else{
+            return
+        }
+        segue.ads = ads
+    }
 }
 
 
@@ -76,6 +86,11 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.configure(label: "", label2: ads?.title ?? "",label3: ads?.price ?? 0, image: ads?.images_url.small ?? "")
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let ads = ads?[indexPath.row]
+        performSegue(withIdentifier: "segueToDescription", sender: nil)
     }
     
     

@@ -19,10 +19,29 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Bin-MH-v1r"/>
+                    <connections>
+                        <segue destination="Rxm-Lg-Vs1" kind="show" identifier="segueToDescription" id="UFc-dY-YvA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iK7-hN-Pal" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1679.7101449275362" y="97.767857142857139"/>
+        </scene>
+        <!--Description View Controller-->
+        <scene sceneID="XbE-z9-GL8">
+            <objects>
+                <viewController id="Rxm-Lg-Vs1" customClass="DescriptionViewController" customModule="ListLeboncoin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H16-kb-HWd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Ntk-Gn-JVR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Fvv-gm-wEw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6fp-Fp-Xju" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2578" y="98"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ck8-du-ZXR">
