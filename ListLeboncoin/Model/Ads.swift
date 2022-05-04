@@ -21,3 +21,8 @@ struct ImageUrl: Decodable{
     let small: String?
     let thumb: String?
 }
+
+struct ID: Decodable {
+    let id : Int
+    let name: String
+}

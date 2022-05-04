@@ -9,7 +9,8 @@ import UIKit
 
 class DescriptionViewController: UIViewController {
 
-    var ads: [Ads]?
+    var ads: Ads?
+    var ids: ID?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +48,7 @@ class DescriptionViewController: UIViewController {
         let label = UILabel()
         label.text = "String(ads?.first?.id)"
         label.backgroundColor = .yellow
-        label.font = .boldSystemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -86,7 +87,7 @@ class DescriptionViewController: UIViewController {
     }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Description"
+        label.text = "Description:"
         label.backgroundColor = .yellow
         label.font = .boldSystemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -96,7 +97,7 @@ class DescriptionViewController: UIViewController {
         let label = UITextView()
         label.text = "Description"
         label.backgroundColor = .yellow
-        label.font = .boldSystemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 10)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -137,7 +138,8 @@ class DescriptionViewController: UIViewController {
     
     private let leboncoinImage: UIImageView = {
         let image = UIImage(named: "Leboncoin")
-        let imageView = UIImageView(image: image!)
+        let imageView = UIImageView(image: image)
+        
         
         return imageView
     }()
@@ -151,6 +153,15 @@ class DescriptionViewController: UIViewController {
         leboncoinImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
         leboncoinImage.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
+        guard let logoimage = ads?.images_url.small else{return}
+        
+        guard let url = URL(string: logoimage) else {return}
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else{return}
+            DispatchQueue.main.async {
+                self.leboncoinImage.image = UIImage(data: data)
+            }
+        }
         // id
         
         //idLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -163,9 +174,12 @@ class DescriptionViewController: UIViewController {
         ///2
         idLabel2.leftAnchor.constraint(equalTo: idLabel.rightAnchor, constant: 20).isActive = true
         idLabel2.centerYAnchor.constraint(equalTo: leboncoinImage.bottomAnchor, constant: 50).isActive = true
-        idLabel2.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        idLabel2.widthAnchor.constraint(equalToConstant: 200).isActive = true
         idLabel2.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        idLabel2.text = ads?.first?.title
+        if let name = ids?.name {
+            idLabel2.text = String(name)
+        }
+        
         
         // category
         
@@ -181,6 +195,7 @@ class DescriptionViewController: UIViewController {
         categoryLabel2.centerYAnchor.constraint(equalTo: idLabel2.bottomAnchor, constant: 10).isActive = true
         categoryLabel2.widthAnchor.constraint(equalToConstant: 50).isActive = true
         categoryLabel2.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        //categoryLabel2.text =
         
         //Title
         
@@ -194,9 +209,9 @@ class DescriptionViewController: UIViewController {
         //2
         titleLabel2.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 20).isActive = true
         titleLabel2.centerYAnchor.constraint(equalTo: categoryLabel2.bottomAnchor, constant: 10).isActive = true
-        titleLabel2.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        titleLabel2.widthAnchor.constraint(equalToConstant: 100).isActive = true
         titleLabel2.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
+        titleLabel2.text = ads?.title
         //Price
         
         //idLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -207,10 +222,14 @@ class DescriptionViewController: UIViewController {
         //2
         priceLabel2.leftAnchor.constraint(equalTo: priceLabel.rightAnchor, constant: 20).isActive = true
         priceLabel2.centerYAnchor.constraint(equalTo: titleLabel2.bottomAnchor, constant: 10).isActive = true
-        priceLabel2.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        priceLabel2.widthAnchor.constraint(equalToConstant: 100).isActive = true
         priceLabel2.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        if let price = ads?.price{
+            priceLabel2.text = String(price)
+        }
+        //priceLabel2.text = String(ads?.first?.price!) ?? ""
         
-        //Price
+        //urgent
         
         //idLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         urgenLabel.centerYAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 10).isActive = true
@@ -220,8 +239,12 @@ class DescriptionViewController: UIViewController {
         //2
         urgenLabel2.leftAnchor.constraint(equalTo: urgenLabel.rightAnchor, constant: 20).isActive = true
         urgenLabel2.centerYAnchor.constraint(equalTo: priceLabel2.bottomAnchor, constant: 10).isActive = true
-        urgenLabel2.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        urgenLabel2.widthAnchor.constraint(equalToConstant: 100).isActive = true
         urgenLabel2.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        //urgenLabel2.text = String(ads?.first?.is_urgent)
+        if let urgent = ads?.is_urgent{
+            urgenLabel2.text = String(urgent)
+        }
         
         //Description
         
@@ -231,14 +254,11 @@ class DescriptionViewController: UIViewController {
         descriptionLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
         descriptionLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         //2
-        //descriptionLabel2.leftAnchor.constraint(equalTo: descriptionLabel.rightAnchor, constant: 20).isActive = true
-        descriptionLabel2.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50).isActive = true
-        //descriptionLabel2.centerYAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10).isActive = true
-        //descriptionLabel2.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        //descriptionLabel2.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        descriptionLabel2.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10).isActive = true
         descriptionLabel2.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         descriptionLabel2.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         descriptionLabel2.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        descriptionLabel2.text = ads?.description
         
         
     }

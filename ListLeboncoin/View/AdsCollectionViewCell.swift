@@ -14,7 +14,7 @@ class AdsCollectionViewCell: UICollectionViewCell {
     private let myImageView: UIImageView = {
         let imageView =  UIImageView()
         imageView.backgroundColor = .yellow
-        imageView.image = UIImage(systemName: "house")
+        //imageView.image = UIImage(systemName: "house")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         
@@ -66,9 +66,7 @@ class AdsCollectionViewCell: UICollectionViewCell {
         myLabel3.frame = CGRect(x: 5, y: contentView.frame.size.height-20, width: contentView.frame.size.width-10, height: 20)
         
         myImageView.frame = CGRect(x: 5, y: contentView.frame.size.height-70, width: contentView.frame.size.width-10, height: -100)
-        
-        
-        
+
     }
     
     public func configure(label: String, label2: String, label3: Float, image: String) {
@@ -82,7 +80,7 @@ class AdsCollectionViewCell: UICollectionViewCell {
         }
         myLabel.text = label
         myLabel2.text = label2
-        myLabel3.text = String(label3)
+        myLabel3.text = "\(String(label3)) €"
     }
     
     override func prepareForReuse() {
