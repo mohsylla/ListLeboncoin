@@ -7,16 +7,18 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class ListViewController: UIViewController,UISearchBarDelegate,UISearchResultsUpdating {
 
     private var ads: [Ads]?
     var ids: [ID]?
     var idList : ID?
     var adsList : Ads?
-    var changeLink: String?
-    var categorie: String?
+    var cate :String?
     private let searchController = UISearchController()
     private var collectionView: UICollectionView?
+    var filterSearch = [Ads]()
+    
+    
     
     func initSearchController(){
         
@@ -28,7 +30,8 @@ class ListViewController: UIViewController {
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        searchController.searchBar.scopeButtonTitles = ["all","Véhicule","Mode","Bricolage","Maison","Loisir","Immobillier","Livre/CD/DVD","Multimedia","Services","Animaux","Enfants"]
+        searchController.searchBar.scopeButtonTitles = ["All","Véhicule","Mode","Bricolage","Maison","Loisir","Immobillier","Livre/CD/DVD","Multimedia","Services","Animaux","Enfants"]
+        //["1","2","3","4","5","6","7","8","9","10","11","12"]
         searchController.searchBar.delegate = self
     }
     
@@ -36,8 +39,11 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        /*
         title = "List of annonce"
         view.backgroundColor = .systemBackground
+         */
+        initSearchController()
         
         collectionView?.reloadData()
         let layout = UICollectionViewFlowLayout()
@@ -46,6 +52,7 @@ class ListViewController: UIViewController {
         layout.minimumInteritemSpacing = 1
         layout.itemSize = CGSize(width: (view.frame.size.width/2)-4,
                                  height: (view.frame.size.width/2)-4)
+        
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
@@ -58,6 +65,7 @@ class ListViewController: UIViewController {
         collectionView.delegate = self
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
+        collectionView.backgroundColor = .orange
         callAPiID()
         callAPi()
     }
@@ -97,6 +105,7 @@ class ListViewController: UIViewController {
         }
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "segueToDescription" else{
             return
@@ -105,7 +114,6 @@ class ListViewController: UIViewController {
             return
         }
         segue.ads = adsList
-        segue.ids = idList
     }
 }
 
@@ -113,51 +121,66 @@ class ListViewController: UIViewController {
 
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if (searchController.isActive){
+            return filterSearch.count
+        }
         return ads?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AdsCollectionViewCell.identifier, for: indexPath) as! AdsCollectionViewCell
         
+        let thisAds: Ads?
+        
+        if(searchController.isActive){
+            thisAds = filterSearch[indexPath.row]
+        }else{
+            thisAds = ads?[indexPath.row]
+        }
         
         
-        let ads = ads?[indexPath.row]
-        //let id2 = ids?[indexPath.row]
-        
-        guard let name = ads?.category_id else{
+        guard let name = thisAds?.category_id else{
             return UICollectionViewCell()
         }
         
+        
         switch name {
         case 1:
-            categorie = "Véhicule"
+            cell.myLabel.text = ids?.first?.name
+            
         case 2:
-            categorie = "Mode"
+            cell.myLabel.text = ids?[1].name
         case 3:
-            categorie = "bricolage"
+            cell.myLabel.text = ids?[2].name
         case 4:
-            categorie = "Maison"
+            cell.myLabel.text = ids?[3].name
         case 5:
-            categorie = "Loisirs"
+            cell.myLabel.text = ids?[4].name
         case 6:
-            categorie = "Immobilier"
+            cell.myLabel.text = ids?[5].name
         case 7:
-            categorie = "Livres/CD/DVD"
+            cell.myLabel.text = ids?[6].name
         case 8:
-            categorie = "Multimedia"
+            cell.myLabel.text = ids?[7].name
         case 9:
-            categorie = "Service"
+            cell.myLabel.text = ids?[8].name
         case 10:
-            categorie = "Animaux"
+            cell.myLabel.text = ids?[9].name
         case 11:
-            categorie = "Enfants"
+            cell.myLabel.text = ids?[10].name
         default:
-            categorie = ""
+            cell.myLabel.text = ""
             
             
         }
         
-        cell.configure(label: categorie ?? "", label2: ads?.title ?? "",label3: ads?.price ?? 0, image: ads?.images_url.small ?? "")
+    
+        if thisAds?.is_urgent == true {
+            cell.urgentImage.isHidden = false
+        }
+        
+        
+        cell.configure(label: cell.myLabel.text ?? "", label2: thisAds?.title ?? "",label3: thisAds?.price ?? 0, image: thisAds?.images_url.small ?? "")
         
         
         
@@ -165,21 +188,55 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let ads = ads?[indexPath.row]
-        let id = ids?[indexPath.row]
-        self.adsList = ads
-        self.idList = id
+        let cell = collectionView.cellForItem(at: indexPath)
+            cell?.layer.borderColor = UIColor.blue.cgColor
+            cell?.layer.borderWidth = 14
+            //cell?.isSelected = true
+        
+        let thisAds: Ads?
+        
+        if(searchController.isActive){
+            thisAds = filterSearch[indexPath.row]
+        }else{
+            thisAds = ads?[indexPath.row]
+        }
+        
+        self.adsList = thisAds
         
         performSegue(withIdentifier: "segueToDescription", sender: nil)
     }
     
     
-}
-
-extension ListViewController: UISearchBarDelegate,UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {
-        <#code#>
+        let searchBar = searchController.searchBar
+        let scopeButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        let searchText = searchBar.text!
+        
+        filterForSearchTextAndScopeButton(searchText: searchText, scopeButton: scopeButton)
+    }
+    func filterForSearchTextAndScopeButton(searchText: String, scopeButton: String = "All"){
+        guard let ads = ads else{
+            return
+        }
+        filterSearch = ads.filter{
+            ads in
+            guard let categorie = ids?.first?.name else{
+                return false
+            }
+            
+            let scopeMatch = (scopeButton == "All" || String(categorie).lowercased().contains(scopeButton.lowercased()))
+            if(searchController.searchBar.text != ""){
+                let searchTextMatch = String(ads.category_id).lowercased().contains(searchText.lowercased())
+                return scopeMatch && searchTextMatch
+            }
+            else{
+                return scopeMatch
+            }
+            
+        }
+        collectionView?.reloadData()
     }
     
-    
 }
+
+

@@ -7,7 +7,7 @@
 
 import Foundation
 enum Categories {
-case vehicule
+    case vehicule
     case Mode
     case bricolage
     case maison

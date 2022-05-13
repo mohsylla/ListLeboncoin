@@ -13,7 +13,7 @@ class AdsCollectionViewCell: UICollectionViewCell {
     
     private let myImageView: UIImageView = {
         let imageView =  UIImageView()
-        imageView.backgroundColor = .yellow
+        //imageView.backgroundColor = .yellow
         //imageView.image = UIImage(systemName: "house")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -21,17 +21,27 @@ class AdsCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let myLabel: UILabel = {
+    let myLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .green
+        //label.backgroundColor = .orange
         label.textAlignment = .center
         label.text = "Custom"
         return label
     }()
     
+    let urgentImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "star.fill")
+        //imageView.backgroundColor = UIColor(red: 254, green: 110, blue: 19, alpha: 1)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.isHidden = true
+        return imageView
+    }()
+    
     private let myLabel2: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .blue
+        label.backgroundColor = .orange
         label.textAlignment = .center
         label.text = "Custom2"
         return label
@@ -39,7 +49,7 @@ class AdsCollectionViewCell: UICollectionViewCell {
     
     private let myLabel3: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .cyan
+        label.backgroundColor = .orange
         label.textAlignment = .center
         label.text = "Custom3"
         return label
@@ -52,6 +62,7 @@ class AdsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(myImageView)
         contentView.addSubview(myLabel2)
         contentView.addSubview(myLabel3)
+        contentView.addSubview(urgentImage)
         contentView.clipsToBounds = true
     }
     
@@ -66,8 +77,10 @@ class AdsCollectionViewCell: UICollectionViewCell {
         myLabel3.frame = CGRect(x: 5, y: contentView.frame.size.height-20, width: contentView.frame.size.width-10, height: 20)
         
         myImageView.frame = CGRect(x: 5, y: contentView.frame.size.height-70, width: contentView.frame.size.width-10, height: -100)
+        urgentImage.frame = CGRect(x: 10, y: contentView.frame.size.height-170, width: 30, height: 30)
 
     }
+    
     
     public func configure(label: String, label2: String, label3: Float, image: String) {
         
@@ -78,7 +91,7 @@ class AdsCollectionViewCell: UICollectionViewCell {
                 self.myImageView.image = UIImage(data: data)
             }
         }
-        myLabel.text = label
+        myLabel.text = String(label)
         myLabel2.text = label2
         myLabel3.text = "\(String(label3)) €"
     }

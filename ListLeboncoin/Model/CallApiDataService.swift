@@ -6,22 +6,23 @@
 //
 
 import Foundation
+
 class CallApiDataService {
     static let shared = CallApiDataService()
     private init(){}
     
     private var task: URLSessionDataTask?
     private var session = URLSession(configuration: .default)
-    
+    var id: [ID]?
     func getAnnonce(callback: @escaping (Result<[Ads]?,ErrorCasesCallApi>)->Void){
         guard let url = URL(string: "https://raw.githubusercontent.com/leboncoin/paperclip/master/listing.json") else{
             return
         }
         //print("making api call...")
         
-        var request = URLRequest(url: url)
+       // var request = URLRequest(url: url)
 
-        task = session.dataTask(with: request) { data, _ , error in
+        task = session.dataTask(with: url) { data, _ , error in
             DispatchQueue.main.async {
                 
                 guard let data = data, error == nil else {
@@ -31,15 +32,10 @@ class CallApiDataService {
                             guard let responseJson = try? JSONDecoder().decode([Ads].self, from: data) else{
                                 return callback(.failure(.errorJsonData))
                             }
+                
+               
+                
                 callback(.success(responseJson))
-                /*self.getID { id in
-                    switch id {
-                    case .success(let id):
-                        callback(.success(id))
-                    case.failure(let error):
-                        
-                    }
-                }*/
             }
             
             
